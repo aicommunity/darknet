@@ -28,13 +28,13 @@ void train_regressor(char *datacfg, char *cfgfile, char *weightfile, int *gpus, 
     int imgs = net->batch * net->subdivisions * ngpus;
 
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *backup_directory = option_find_str(options, "backup", "/backup/");
     char *train_list = option_find_str(options, "train", "data/train.list");
     int classes = option_find_int(options, "classes", 1);
 
-    list *plist = get_paths(train_list);
+    listdn *plist = get_paths(train_list);
     char **paths = (char **)list_to_array(plist);
     printf("%d\n", plist->size);
     int N = plist->size;
@@ -155,7 +155,7 @@ void demo_regressor(char *datacfg, char *cfgfile, char *weightfile, int cam_inde
     set_batch_network(net, 1);
 
     srand(2222222);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
     int classes = option_find_int(options, "classes", 1);
     char *name_list = option_find_str(options, "names", 0);
     char **names = get_labels(name_list);

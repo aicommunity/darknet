@@ -23,7 +23,7 @@ void train_yolo(char *cfgfile, char *weightfile)
     int classes = l.classes;
     float jitter = l.jitter;
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     //int N = plist->size;
     char **paths = (char **)list_to_array(plist);
 
@@ -103,9 +103,9 @@ void validate_yolo(char *cfg, char *weights)
     srand(time(0));
 
     char *base = "results/comp4_det_test_";
-    //list *plist = get_paths("data/voc.2007.test");
-    list *plist = get_paths("/home/pjreddie/data/voc/2007_test.txt");
-    //list *plist = get_paths("data/voc.2012.test");
+    //listdn *plist = get_paths("data/voc.2007.test");
+    listdn *plist = get_paths("/home/pjreddie/data/voc/2007_test.txt");
+    //listdn *plist = get_paths("data/voc.2012.test");
     char **paths = (char **)list_to_array(plist);
 
     layer l = net->layers[net->n-1];
@@ -187,7 +187,7 @@ void validate_yolo_recall(char *cfg, char *weights)
     srand(time(0));
 
     char *base = "results/comp4_det_test_";
-    list *plist = get_paths("data/voc.2007.test");
+    listdn *plist = get_paths("data/voc.2007.test");
     char **paths = (char **)list_to_array(plist);
 
     layer l = net->layers[net->n-1];

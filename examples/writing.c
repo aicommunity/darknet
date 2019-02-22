@@ -13,7 +13,7 @@ void train_writing(char *cfgfile, char *weightfile)
     }
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net.learning_rate, net.momentum, net.decay);
     int imgs = net.batch*net.subdivisions;
-    list *plist = get_paths("figures.list");
+    listdn *plist = get_paths("figures.list");
     char **paths = (char **)list_to_array(plist);
     clock_t time;
     int N = plist->size;

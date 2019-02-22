@@ -17,7 +17,7 @@ void train_dice(char *cfgfile, char *weightfile)
     int imgs = 1024;
     int i = *net.seen/imgs;
     char **labels = dice_labels;
-    list *plist = get_paths("data/dice/dice.train.list");
+    listdn *plist = get_paths("data/dice/dice.train.list");
     char **paths = (char **)list_to_array(plist);
     printf("%d\n", plist->size);
     clock_t time;
@@ -51,7 +51,7 @@ void validate_dice(char *filename, char *weightfile)
     srand(time(0));
 
     char **labels = dice_labels;
-    list *plist = get_paths("data/dice/dice.val.list");
+    listdn *plist = get_paths("data/dice/dice.val.list");
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;

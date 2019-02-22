@@ -35,7 +35,7 @@ void train_captcha(char *cfgfile, char *weightfile)
     int imgs = 1024;
     int i = *net->seen/imgs;
     int solved = 1;
-    list *plist;
+    listdn *plist;
     char **labels = get_labels("/data/captcha/reimgs.labels.list");
     if (solved){
         plist = get_paths("/data/captcha/reimgs.solved.list");
@@ -131,7 +131,7 @@ void valid_captcha(char *cfgfile, char *weightfile, char *filename)
 {
     char **labels = get_labels("/data/captcha/reimgs.labels.list");
     network *net = load_network(cfgfile, weightfile, 0);
-    list *plist = get_paths("/data/captcha/reimgs.fg.list");
+    listdn *plist = get_paths("/data/captcha/reimgs.fg.list");
     char **paths = (char **)list_to_array(plist);
     int N = plist->size;
     int outputs = net->outputs;
@@ -179,7 +179,7 @@ void valid_captcha(char *cfgfile, char *weightfile, char *filename)
    printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
    int imgs = 1024;
    int i = net->seen/imgs;
-   list *plist = get_paths("/data/captcha/train.auto5");
+   listdn *plist = get_paths("/data/captcha/train.auto5");
    char **paths = (char **)list_to_array(plist);
    printf("%d\n", plist->size);
    clock_t time;
@@ -245,7 +245,7 @@ if(weightfile){
 printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
 int imgs = 1024;
 int i = net->seen/imgs;
-list *plist = get_paths("/data/captcha/encode.list");
+listdn *plist = get_paths("/data/captcha/encode.list");
 char **paths = (char **)list_to_array(plist);
 printf("%d\n", plist->size);
 clock_t time;
@@ -280,7 +280,7 @@ void validate_captcha(char *cfgfile, char *weightfile)
         load_weights(&net, weightfile);
     }
     int numchars = 37;
-    list *plist = get_paths("/data/captcha/solved.hard");
+    listdn *plist = get_paths("/data/captcha/solved.hard");
     char **paths = (char **)list_to_array(plist);
     int imgs = plist->size;
     data valid = load_data_captcha(paths, imgs, 0, 10, 200, 60);

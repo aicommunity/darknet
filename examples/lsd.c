@@ -24,10 +24,10 @@ void train_lsd3(char *fcfg, char *fweight, char *gcfg, char *gweight, char *acfg
     data style, sbuffer;
 
 
-    list *slist = get_paths(style_images);
+    listdn *slist = get_paths(style_images);
     char **spaths = (char **)list_to_array(slist);
 
-    list *tlist = get_paths(train_images);
+    listdn *tlist = get_paths(train_images);
     char **tpaths = (char **)list_to_array(tlist);
 
     load_args targs= get_base_args(gnet);
@@ -222,7 +222,7 @@ void train_pix2pix(char *cfg, char *weight, char *acfg, char *aweight, int clear
     data train, buffer;
 
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     //int N = plist->size;
     char **paths = (char **)list_to_array(plist);
 
@@ -533,7 +533,7 @@ void train_prog(char *cfg, char *weight, char *acfg, char *aweight, int clear, i
     data train, buffer;
 
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     char **paths = (char **)list_to_array(plist);
 
     load_args args= get_base_args(anet);
@@ -696,7 +696,7 @@ void train_dcgan(char *cfg, char *weight, char *acfg, char *aweight, int clear, 
     data train, buffer;
 
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     //int N = plist->size;
     char **paths = (char **)list_to_array(plist);
 
@@ -892,7 +892,7 @@ void train_colorizer(char *cfg, char *weight, char *acfg, char *aweight, int cle
     data train, buffer;
 
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     //int N = plist->size;
     char **paths = (char **)list_to_array(plist);
 
@@ -1071,7 +1071,7 @@ i = *net->seen/imgs;
 data train, buffer;
 
 
-list *plist = get_paths(train_images);
+listdn *plist = get_paths(train_images);
 //int N = plist->size;
 char **paths = (char **)list_to_array(plist);
 
@@ -1230,7 +1230,7 @@ save_weights(net, buff);
    data train, buffer;
 
 
-   list *plist = get_paths(train_images);
+   listdn *plist = get_paths(train_images);
 //int N = plist->size;
 char **paths = (char **)list_to_array(plist);
 

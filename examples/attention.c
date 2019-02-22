@@ -78,7 +78,7 @@ void train_attention(char *datacfg, char *cfgfile, char *weightfile, int *gpus, 
     int imgs = net->batch * net->subdivisions * ngpus;
 
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *backup_directory = option_find_str(options, "backup", "/backup/");
     char *label_list = option_find_str(options, "labels", "data/labels.list");
@@ -86,7 +86,7 @@ void train_attention(char *datacfg, char *cfgfile, char *weightfile, int *gpus, 
     int classes = option_find_int(options, "classes", 2);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(train_list);
+    listdn *plist = get_paths(train_list);
     char **paths = (char **)list_to_array(plist);
     printf("%d\n", plist->size);
     int N = plist->size;
@@ -237,7 +237,7 @@ void validate_attention_single(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *leaf_list = option_find_str(options, "leaves", 0);
@@ -247,7 +247,7 @@ void validate_attention_single(char *datacfg, char *filename, char *weightfile)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -325,7 +325,7 @@ void validate_attention_multi(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *valid_list = option_find_str(options, "valid", "data/train.list");
@@ -385,7 +385,7 @@ void predict_attention(char *datacfg, char *cfgfile, char *weightfile, char *fil
     set_batch_network(net, 1);
     srand(2222222);
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *name_list = option_find_str(options, "names", 0);
     if(!name_list) name_list = option_find_str(options, "labels", "data/labels.list");

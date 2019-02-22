@@ -30,7 +30,7 @@ void train_coco(char *cfgfile, char *weightfile)
     int classes = l.classes;
     float jitter = l.jitter;
 
-    list *plist = get_paths(train_images);
+    listdn *plist = get_paths(train_images);
     //int N = plist->size;
     char **paths = (char **)list_to_array(plist);
 
@@ -133,7 +133,7 @@ void validate_coco(char *cfg, char *weights)
     srand(time(0));
 
     char *base = "results/";
-    list *plist = get_paths("data/coco_val_5k.list");
+    listdn *plist = get_paths("data/coco_val_5k.list");
     //list *plist = get_paths("/home/pjreddie/data/people-art/test.txt");
     //list *plist = get_paths("/home/pjreddie/data/voc/test/2007_test.txt");
     char **paths = (char **)list_to_array(plist);
@@ -217,7 +217,7 @@ void validate_coco_recall(char *cfgfile, char *weightfile)
     srand(time(0));
 
     char *base = "results/comp4_det_test_";
-    list *plist = get_paths("/home/pjreddie/data/voc/test/2007_test.txt");
+    listdn *plist = get_paths("/home/pjreddie/data/voc/test/2007_test.txt");
     char **paths = (char **)list_to_array(plist);
 
     layer l = net->layers[net->n-1];

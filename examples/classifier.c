@@ -41,7 +41,7 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int *gpus,
     int imgs = net->batch * net->subdivisions * ngpus;
 
     printf("Learning Rate: %g, Momentum: %g, Decay: %g\n", net->learning_rate, net->momentum, net->decay);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *backup_directory = option_find_str(options, "backup", "/backup/");
     int tag = option_find_int_quiet(options, "tag", 0);
@@ -55,7 +55,7 @@ void train_classifier(char *datacfg, char *cfgfile, char *weightfile, int *gpus,
     if(!tag){
         labels = get_labels(label_list);
     }
-    list *plist = get_paths(train_list);
+    listdn *plist = get_paths(train_list);
     char **paths = (char **)list_to_array(plist);
     printf("%d\n", plist->size);
     int N = plist->size;
@@ -173,7 +173,7 @@ void validate_classifier_crop(char *datacfg, char *filename, char *weightfile)
     network *net = load_network(filename, weightfile, 0);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *valid_list = option_find_str(options, "valid", "data/train.list");
@@ -181,7 +181,7 @@ void validate_classifier_crop(char *datacfg, char *filename, char *weightfile)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -238,7 +238,7 @@ void validate_classifier_10(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *valid_list = option_find_str(options, "valid", "data/train.list");
@@ -246,7 +246,7 @@ void validate_classifier_10(char *datacfg, char *filename, char *weightfile)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -307,7 +307,7 @@ void validate_classifier_full(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *valid_list = option_find_str(options, "valid", "data/train.list");
@@ -315,7 +315,7 @@ void validate_classifier_full(char *datacfg, char *filename, char *weightfile)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -365,7 +365,7 @@ void validate_classifier_single(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *leaf_list = option_find_str(options, "leaves", 0);
@@ -375,7 +375,7 @@ void validate_classifier_single(char *datacfg, char *filename, char *weightfile)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -424,7 +424,7 @@ void validate_classifier_multi(char *datacfg, char *cfg, char *weights)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "labels", "data/labels.list");
     char *valid_list = option_find_str(options, "valid", "data/train.list");
@@ -432,7 +432,7 @@ void validate_classifier_multi(char *datacfg, char *cfg, char *weights)
     int topk = option_find_int(options, "top", 1);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(valid_list);
+    listdn *plist = get_paths(valid_list);
     //int scales[] = {224, 288, 320, 352, 384};
     int scales[] = {224, 256, 288, 320};
     int nscales = sizeof(scales)/sizeof(scales[0]);
@@ -485,7 +485,7 @@ void try_classifier(char *datacfg, char *cfgfile, char *weightfile, char *filena
     set_batch_network(net, 1);
     srand(2222222);
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *name_list = option_find_str(options, "names", 0);
     if(!name_list) name_list = option_find_str(options, "labels", "data/labels.list");
@@ -563,7 +563,7 @@ void predict_classifier(char *datacfg, char *cfgfile, char *weightfile, char *fi
     set_batch_network(net, 1);
     srand(2222222);
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *name_list = option_find_str(options, "names", 0);
     if(!name_list) name_list = option_find_str(options, "labels", "data/labels.list");
@@ -618,14 +618,14 @@ void label_classifier(char *datacfg, char *filename, char *weightfile)
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *label_list = option_find_str(options, "names", "data/labels.list");
     char *test_list = option_find_str(options, "test", "data/train.list");
     int classes = option_find_int(options, "classes", 2);
 
     char **labels = get_labels(label_list);
-    list *plist = get_paths(test_list);
+    listdn *plist = get_paths(test_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -652,12 +652,12 @@ void csv_classifier(char *datacfg, char *cfgfile, char *weightfile)
     network *net = load_network(cfgfile, weightfile, 0);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *test_list = option_find_str(options, "test", "data/test.list");
     int top = option_find_int(options, "top", 1);
 
-    list *plist = get_paths(test_list);
+    listdn *plist = get_paths(test_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -692,12 +692,12 @@ void test_classifier(char *datacfg, char *cfgfile, char *weightfile, int target_
     network *net = load_network(cfgfile, weightfile, 0);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     char *test_list = option_find_str(options, "test", "data/test.list");
     int classes = option_find_int(options, "classes", 2);
 
-    list *plist = get_paths(test_list);
+    listdn *plist = get_paths(test_list);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -762,12 +762,12 @@ void file_output_classifier(char *datacfg, char *filename, char *weightfile, cha
     set_batch_network(net, 1);
     srand(time(0));
 
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     //char *label_list = option_find_str(options, "names", "data/labels.list");
     int classes = option_find_int(options, "classes", 2);
 
-    list *plist = get_paths(listfile);
+    listdn *plist = get_paths(listfile);
 
     char **paths = (char **)list_to_array(plist);
     int m = plist->size;
@@ -803,7 +803,7 @@ void threat_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_i
     printf("Classifier Demo\n");
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     srand(2222222);
     void * cap = open_video_stream(filename, cam_index, 0,0,0);
@@ -925,7 +925,7 @@ void gun_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_inde
     printf("Classifier Demo\n");
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     srand(2222222);
     void * cap = open_video_stream(filename, cam_index, 0,0,0);
@@ -991,7 +991,7 @@ void demo_classifier(char *datacfg, char *cfgfile, char *weightfile, int cam_ind
     printf("Classifier Demo\n");
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
-    list *options = read_data_cfg(datacfg);
+    listdn *options = read_data_cfg(datacfg);
 
     srand(2222222);
 
